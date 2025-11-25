@@ -9,6 +9,8 @@ import Dashboard from "./pages/Dashboard";
 import Auth from "./pages/Auth";
 import Users from "./pages/Users";
 import Settings from "./pages/Settings";
+import Leads from "./pages/Leads";
+import LeadDetails from "./pages/LeadDetails";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -27,6 +29,26 @@ const App = () => (
               <AuthGuard>
                 <DashboardLayout>
                   <Dashboard />
+                </DashboardLayout>
+              </AuthGuard>
+            }
+          />
+          <Route
+            path="/leads"
+            element={
+              <AuthGuard>
+                <DashboardLayout>
+                  <Leads />
+                </DashboardLayout>
+              </AuthGuard>
+            }
+          />
+          <Route
+            path="/leads/:id"
+            element={
+              <AuthGuard>
+                <DashboardLayout>
+                  <LeadDetails />
                 </DashboardLayout>
               </AuthGuard>
             }

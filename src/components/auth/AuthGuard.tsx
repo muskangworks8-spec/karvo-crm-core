@@ -5,7 +5,7 @@ import { User, Session } from "@supabase/supabase-js";
 
 interface AuthGuardProps {
   children: React.ReactNode;
-  requiredRole?: "admin" | "manager" | "team_member";
+  requiredRole?: "admin" | "manager" | "team_member" | ("admin" | "manager" | "team_member")[];
 }
 
 export const AuthGuard = ({ children, requiredRole }: AuthGuardProps) => {
@@ -47,18 +47,20 @@ export const AuthGuard = ({ children, requiredRole }: AuthGuardProps) => {
         return;
       }
 
+      // Handle both single role and array of roles
+      const allowedRoles = Array.isArray(requiredRole) ? requiredRole : [requiredRole];
+
       const { data, error } = await supabase
         .from("user_roles")
         .select("role")
         .eq("user_id", user.id)
-        .eq("role", requiredRole)
-        .maybeSingle();
+        .in("role", allowedRoles);
 
       if (error) {
         console.error("Error checking role:", error);
         setHasAccess(false);
       } else {
-        setHasAccess(!!data);
+        setHasAccess(data && data.length > 0);
       }
       
       setLoading(false);
