@@ -14,6 +14,153 @@ export type Database = {
   }
   public: {
     Tables: {
+      client_activities: {
+        Row: {
+          activity_type: Database["public"]["Enums"]["activity_type"] | null
+          client_id: string
+          created_at: string
+          description: string
+          id: string
+          metadata: Json | null
+          user_id: string | null
+        }
+        Insert: {
+          activity_type?: Database["public"]["Enums"]["activity_type"] | null
+          client_id: string
+          created_at?: string
+          description: string
+          id?: string
+          metadata?: Json | null
+          user_id?: string | null
+        }
+        Update: {
+          activity_type?: Database["public"]["Enums"]["activity_type"] | null
+          client_id?: string
+          created_at?: string
+          description?: string
+          id?: string
+          metadata?: Json | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "client_activities_client_id_fkey"
+            columns: ["client_id"]
+            isOneToOne: false
+            referencedRelation: "clients"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "client_activities_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      client_notes: {
+        Row: {
+          client_id: string
+          created_at: string
+          id: string
+          note: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          client_id: string
+          created_at?: string
+          id?: string
+          note: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          client_id?: string
+          created_at?: string
+          id?: string
+          note?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "client_notes_client_id_fkey"
+            columns: ["client_id"]
+            isOneToOne: false
+            referencedRelation: "clients"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "client_notes_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      clients: {
+        Row: {
+          address: string | null
+          assigned_user_id: string | null
+          company: string | null
+          created_at: string
+          created_by: string | null
+          email: string | null
+          id: string
+          name: string
+          notes: string | null
+          phone: string | null
+          status: Database["public"]["Enums"]["client_status"] | null
+          updated_at: string
+        }
+        Insert: {
+          address?: string | null
+          assigned_user_id?: string | null
+          company?: string | null
+          created_at?: string
+          created_by?: string | null
+          email?: string | null
+          id?: string
+          name: string
+          notes?: string | null
+          phone?: string | null
+          status?: Database["public"]["Enums"]["client_status"] | null
+          updated_at?: string
+        }
+        Update: {
+          address?: string | null
+          assigned_user_id?: string | null
+          company?: string | null
+          created_at?: string
+          created_by?: string | null
+          email?: string | null
+          id?: string
+          name?: string
+          notes?: string | null
+          phone?: string | null
+          status?: Database["public"]["Enums"]["client_status"] | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "clients_assigned_user_id_fkey"
+            columns: ["assigned_user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "clients_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       lead_activities: {
         Row: {
           activity_type: Database["public"]["Enums"]["activity_type"]
@@ -222,6 +369,128 @@ export type Database = {
         }
         Relationships: []
       }
+      task_activities: {
+        Row: {
+          activity_type: Database["public"]["Enums"]["activity_type"] | null
+          created_at: string
+          description: string
+          id: string
+          metadata: Json | null
+          task_id: string
+          user_id: string | null
+        }
+        Insert: {
+          activity_type?: Database["public"]["Enums"]["activity_type"] | null
+          created_at?: string
+          description: string
+          id?: string
+          metadata?: Json | null
+          task_id: string
+          user_id?: string | null
+        }
+        Update: {
+          activity_type?: Database["public"]["Enums"]["activity_type"] | null
+          created_at?: string
+          description?: string
+          id?: string
+          metadata?: Json | null
+          task_id?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "task_activities_task_id_fkey"
+            columns: ["task_id"]
+            isOneToOne: false
+            referencedRelation: "tasks"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "task_activities_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      tasks: {
+        Row: {
+          assigned_user_id: string | null
+          client_id: string | null
+          completed_at: string | null
+          created_at: string
+          created_by: string | null
+          description: string | null
+          due_date: string | null
+          id: string
+          lead_id: string | null
+          priority: Database["public"]["Enums"]["task_priority"] | null
+          status: Database["public"]["Enums"]["task_status"] | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          assigned_user_id?: string | null
+          client_id?: string | null
+          completed_at?: string | null
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          due_date?: string | null
+          id?: string
+          lead_id?: string | null
+          priority?: Database["public"]["Enums"]["task_priority"] | null
+          status?: Database["public"]["Enums"]["task_status"] | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          assigned_user_id?: string | null
+          client_id?: string | null
+          completed_at?: string | null
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          due_date?: string | null
+          id?: string
+          lead_id?: string | null
+          priority?: Database["public"]["Enums"]["task_priority"] | null
+          status?: Database["public"]["Enums"]["task_status"] | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "tasks_assigned_user_id_fkey"
+            columns: ["assigned_user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "tasks_client_id_fkey"
+            columns: ["client_id"]
+            isOneToOne: false
+            referencedRelation: "clients"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "tasks_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "tasks_lead_id_fkey"
+            columns: ["lead_id"]
+            isOneToOne: false
+            referencedRelation: "leads"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       user_roles: {
         Row: {
           created_at: string
@@ -267,6 +536,7 @@ export type Database = {
         | "meeting_scheduled"
         | "other"
       app_role: "admin" | "manager" | "team_member"
+      client_status: "active" | "inactive" | "prospect" | "former"
       lead_source:
         | "website"
         | "referral"
@@ -275,6 +545,8 @@ export type Database = {
         | "phone"
         | "other"
       lead_status: "new" | "contacted" | "in_progress" | "converted" | "lost"
+      task_priority: "low" | "medium" | "high" | "urgent"
+      task_status: "pending" | "in_progress" | "completed" | "cancelled"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -412,6 +684,7 @@ export const Constants = {
         "other",
       ],
       app_role: ["admin", "manager", "team_member"],
+      client_status: ["active", "inactive", "prospect", "former"],
       lead_source: [
         "website",
         "referral",
@@ -421,6 +694,8 @@ export const Constants = {
         "other",
       ],
       lead_status: ["new", "contacted", "in_progress", "converted", "lost"],
+      task_priority: ["low", "medium", "high", "urgent"],
+      task_status: ["pending", "in_progress", "completed", "cancelled"],
     },
   },
 } as const

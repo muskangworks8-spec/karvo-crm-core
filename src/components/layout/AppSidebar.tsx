@@ -1,4 +1,4 @@
-import { Home, Users, Settings, LogOut } from "lucide-react";
+
 import { NavLink } from "@/components/NavLink";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
@@ -15,9 +15,13 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 
+import { Home, Users, Settings, LogOut, Briefcase, CheckSquare } from "lucide-react";
+
 const menuItems = [
   { title: "Dashboard", url: "/", icon: Home },
   { title: "Leads", url: "/leads", icon: Users },
+  { title: "Clients", url: "/clients", icon: Briefcase },
+  { title: "Tasks", url: "/tasks", icon: CheckSquare },
   { title: "Users", url: "/users", icon: Users, adminOnly: true },
   { title: "Settings", url: "/settings", icon: Settings },
 ];
