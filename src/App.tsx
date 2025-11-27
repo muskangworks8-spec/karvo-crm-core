@@ -11,6 +11,9 @@ import Users from "./pages/Users";
 import Settings from "./pages/Settings";
 import Leads from "./pages/Leads";
 import LeadDetails from "./pages/LeadDetails";
+import Clients from "./pages/Clients";
+import ClientDetails from "./pages/ClientDetails";
+import Tasks from "./pages/Tasks";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -49,6 +52,36 @@ const App = () => (
               <AuthGuard>
                 <DashboardLayout>
                   <LeadDetails />
+                </DashboardLayout>
+              </AuthGuard>
+            }
+          />
+          <Route
+            path="/clients"
+            element={
+              <AuthGuard>
+                <DashboardLayout>
+                  <Clients />
+                </DashboardLayout>
+              </AuthGuard>
+            }
+          />
+          <Route
+            path="/clients/:id"
+            element={
+              <AuthGuard>
+                <DashboardLayout>
+                  <ClientDetails />
+                </DashboardLayout>
+              </AuthGuard>
+            }
+          />
+          <Route
+            path="/tasks"
+            element={
+              <AuthGuard>
+                <DashboardLayout>
+                  <Tasks />
                 </DashboardLayout>
               </AuthGuard>
             }
