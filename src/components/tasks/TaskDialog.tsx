@@ -63,9 +63,9 @@ export function TaskDialog({ open, onOpenChange, task, leadId, clientId, onSucce
       due_date: "",
       priority: "medium",
       status: "pending",
-      assigned_user_id: "",
-      lead_id: leadId || "",
-      client_id: clientId || "",
+      assigned_user_id: "unassigned",
+      lead_id: leadId || "none",
+      client_id: clientId || "none",
     },
   });
 
@@ -81,9 +81,9 @@ export function TaskDialog({ open, onOpenChange, task, leadId, clientId, onSucce
           due_date: task.due_date ? new Date(task.due_date).toISOString().slice(0, 16) : "",
           priority: task.priority,
           status: task.status,
-          assigned_user_id: task.assigned_user_id || "",
-          lead_id: task.lead_id || "",
-          client_id: task.client_id || "",
+          assigned_user_id: task.assigned_user_id || "unassigned",
+          lead_id: task.lead_id || "none",
+          client_id: task.client_id || "none",
         });
       } else {
         form.reset({
@@ -92,9 +92,9 @@ export function TaskDialog({ open, onOpenChange, task, leadId, clientId, onSucce
           due_date: "",
           priority: "medium",
           status: "pending",
-          assigned_user_id: "",
-          lead_id: leadId || "",
-          client_id: clientId || "",
+          assigned_user_id: "unassigned",
+          lead_id: leadId || "none",
+          client_id: clientId || "none",
         });
       }
     }
@@ -126,9 +126,9 @@ export function TaskDialog({ open, onOpenChange, task, leadId, clientId, onSucce
         due_date: values.due_date ? new Date(values.due_date).toISOString() : null,
         priority: values.priority,
         status: values.status,
-        assigned_user_id: values.assigned_user_id || null,
-        lead_id: values.lead_id || null,
-        client_id: values.client_id || null,
+        assigned_user_id: values.assigned_user_id === "unassigned" ? null : values.assigned_user_id,
+        lead_id: values.lead_id === "none" ? null : values.lead_id,
+        client_id: values.client_id === "none" ? null : values.client_id,
         created_by: task ? undefined : user?.id,
       };
 
@@ -290,7 +290,7 @@ export function TaskDialog({ open, onOpenChange, task, leadId, clientId, onSucce
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        <SelectItem value="">Unassigned</SelectItem>
+                        <SelectItem value="unassigned">Unassigned</SelectItem>
                         {users.map((user) => (
                           <SelectItem key={user.id} value={user.id}>
                             {user.full_name}
@@ -318,7 +318,7 @@ export function TaskDialog({ open, onOpenChange, task, leadId, clientId, onSucce
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        <SelectItem value="">None</SelectItem>
+                        <SelectItem value="none">None</SelectItem>
                         {leads.map((lead) => (
                           <SelectItem key={lead.id} value={lead.id}>
                             {lead.name}
@@ -344,7 +344,7 @@ export function TaskDialog({ open, onOpenChange, task, leadId, clientId, onSucce
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        <SelectItem value="">None</SelectItem>
+                        <SelectItem value="none">None</SelectItem>
                         {clients.map((client) => (
                           <SelectItem key={client.id} value={client.id}>
                             {client.name}
