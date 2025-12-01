@@ -15,15 +15,16 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 
-import { Home, Users, Settings, LogOut, Briefcase, CheckSquare } from "lucide-react";
+import { Home, Target, Briefcase, ListTodo, FileText, Settings, Users, LogOut } from "lucide-react";
 
 const menuItems = [
   { title: "Dashboard", url: "/", icon: Home },
-  { title: "Leads", url: "/leads", icon: Users },
+  { title: "Leads", url: "/leads", icon: Target },
   { title: "Clients", url: "/clients", icon: Briefcase },
-  { title: "Tasks", url: "/tasks", icon: CheckSquare },
-  { title: "Users", url: "/users", icon: Users, adminOnly: true },
+  { title: "Tasks", url: "/tasks", icon: ListTodo },
+  { title: "Reports", url: "/reports", icon: FileText },
   { title: "Settings", url: "/settings", icon: Settings },
+  { title: "Users", url: "/users", icon: Users, adminOnly: true },
 ];
 
 export function AppSidebar() {
