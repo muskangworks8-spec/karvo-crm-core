@@ -9,6 +9,7 @@ import Dashboard from "./pages/Dashboard";
 import Auth from "./pages/Auth";
 import Users from "./pages/Users";
 import Settings from "./pages/Settings";
+import Reports from "./pages/Reports";
 import Leads from "./pages/Leads";
 import LeadDetails from "./pages/LeadDetails";
 import Clients from "./pages/Clients";
@@ -87,11 +88,11 @@ const App = () => (
             }
           />
           <Route
-            path="/users"
+            path="/reports"
             element={
-              <AuthGuard requiredRole="admin">
+              <AuthGuard>
                 <DashboardLayout>
-                  <Users />
+                  <Reports />
                 </DashboardLayout>
               </AuthGuard>
             }
@@ -102,6 +103,16 @@ const App = () => (
               <AuthGuard>
                 <DashboardLayout>
                   <Settings />
+                </DashboardLayout>
+              </AuthGuard>
+            }
+          />
+          <Route
+            path="/users"
+            element={
+              <AuthGuard requiredRole="admin">
+                <DashboardLayout>
+                  <Users />
                 </DashboardLayout>
               </AuthGuard>
             }
