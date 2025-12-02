@@ -60,7 +60,7 @@ export function ClientDialog({ open, onOpenChange, client, onSuccess }: ClientDi
       phone: "",
       address: "",
       status: "prospect",
-      assigned_user_id: "",
+      assigned_user_id: "unassigned",
       notes: "",
     },
   });
@@ -76,7 +76,7 @@ export function ClientDialog({ open, onOpenChange, client, onSuccess }: ClientDi
           phone: client.phone || "",
           address: client.address || "",
           status: client.status,
-          assigned_user_id: client.assigned_user_id || "",
+          assigned_user_id: client.assigned_user_id || "unassigned",
           notes: client.notes || "",
         });
       } else {
@@ -87,7 +87,7 @@ export function ClientDialog({ open, onOpenChange, client, onSuccess }: ClientDi
           phone: "",
           address: "",
           status: "prospect",
-          assigned_user_id: "",
+          assigned_user_id: "unassigned",
           notes: "",
         });
       }
@@ -111,7 +111,7 @@ export function ClientDialog({ open, onOpenChange, client, onSuccess }: ClientDi
         phone: values.phone || null,
         address: values.address || null,
         status: values.status,
-        assigned_user_id: values.assigned_user_id || null,
+        assigned_user_id: values.assigned_user_id === "unassigned" ? null : values.assigned_user_id || null,
         notes: values.notes || null,
         created_by: client ? undefined : user?.id,
       };
@@ -278,7 +278,7 @@ export function ClientDialog({ open, onOpenChange, client, onSuccess }: ClientDi
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        <SelectItem value="">Unassigned</SelectItem>
+                        <SelectItem value="unassigned">Unassigned</SelectItem>
                         {users.map((user) => (
                           <SelectItem key={user.id} value={user.id}>
                             {user.full_name}
